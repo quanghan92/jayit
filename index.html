@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAY IT Banner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0a0a;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .banner {
+            width: 1200px;
+            height: 400px;
+            background: linear-gradient(135deg, #0c0c1d 0%, #1a0a2e 50%, #0c0c1d 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            border-radius: 20px;
+            box-shadow: 0 0 60px rgba(0, 150, 255, 0.3);
+        }
+        
+        /* Background Effects */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 150, 255, 0.03) 2px,
+                    rgba(0, 150, 255, 0.03) 4px
+                );
+            animation: scan 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        .grid-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(0, 150, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(0, 150, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center bottom;
+            opacity: 0.3;
+        }
+        
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+        
+        .glow-orb-1 {
+            width: 300px;
+            height: 300px;
+            background: #00d4ff;
+            top: -100px;
+            left: -100px;
+        }
+        
+        .glow-orb-2 {
+            width: 250px;
+            height: 250px;
+            background: #ff00ff;
+            bottom: -50px;
+            right: 200px;
+        }
+        
+        /* Left Section - Branding */
+        .left-section {
+            width: 35%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .brand-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(180deg, #00d4ff 0%, #0099cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .tagline {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .services-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .fb-icon { background: #1877f2; color: white; }
+        .tiktok-icon { 
+            background: #000; 
+            color: #fff;
+            position: relative;
+        }
+        .tiktok-icon::before {
+            content: '♪';
+            text-shadow: 2px 0 #ff0050, -2px 0 #00f2ea;
+        }
+        .shopee-icon { 
+            background: #ee4d2d; 
+            color: white;
+            font-family: Arial;
+        }
+        
+        .hotline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-size: 18px;
+        }
+        
+        .hotline-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        /* Center Section - Pricing */
+        .center-section {
+            width: 40%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .price-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .price-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .price-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(180deg, #00d4ff, #ff00ff);
+        }
+        
+        .price-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .service-name {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            position: relative;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Right Section - CTA */
+        .right-section {
+            width: 25%;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            border-left: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .guarantee {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #00ff88;
+            font-size: 14px;
+            margin-bottom: 30px;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+        
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            background: #00ff88;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(255, 0, 255, 0.2) 100%);
+            border: 2px solid #00d4ff;
+            border-radius: 16px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+        }
+        
+        .cta-main {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .cta-sub {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .extra-services {
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+        }
+        
+        .glow-orb {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* Decorative elements */
+        .corner-accent {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .corner-tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+        .corner-br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+        
+        .neon-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            width: 200px;
+            top: 50%;
+            left: 35%;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <!-- Background Effects -->
+        <div class="grid-lines"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="corner-accent corner-tl"></div>
+        <div class="corner-accent corner-br"></div>
+        <div class="neon-line"></div>
+        
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="brand-name">JAY IT</div>
+            <div class="tagline">Dịch Vụ Tăng Tương Tác - Tài Khoản - Premium</div>
+            
+            <div class="services-icons">
+                <div class="icon-box fb-icon">f</div>
+                <div class="icon-box tiktok-icon"></div>
+                <div class="icon-box shopee-icon">S</div>
+            </div>
+            
+            <div class="hotline">
+                <span>HOTLINE:</span>
+                <span class="hotline-number">0878 446 688</span>
+            </div>
+        </div>
+        
+        <!-- Center Section -->
+        <div class="center-section">
+            <div class="section-title">⚡ Premium Accounts</div>
+            <div class="price-list">
+                <div class="price-item">
+                    <span class="service-name">CapCut Pro</span>
+                    <span class="price-tag">69K</span>
+                </div>
+                <div class="price-item">
+                    <span class="service-name">ChatGPT Plus</span>
+                    <span class="price-tag">149K</span>
+                </div>
+                <div class="price-item">
+                    <span class="service-name">Netflix</span>
+                    <span class="price-tag">99K</span>
+                </div>
+                <div class="price-item">
+                    <span class="service-name">YouTube Premium</span>
+                    <span class="price-tag">49K</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="guarantee">
+                <span class="check-icon">✓</span>
+                <span>Bảo hành đầy đủ - Hỗ trợ 24/7</span>
+            </div>
+            
+            <div class="cta-button">
+                <div class="cta-main">›› NHẮN TIN NGAY</div>
+                <div class="cta-sub">KÍCH HOẠT LIỀN</div>
+            </div>
+            
+            <div class="extra-services">
+                Dịch Vụ Tạo Shop Tiktok, Shopee A-Z<br>
+                Vận Hành Thiết Kế Ảnh, Video - AI
+            </div>
+        </div>
+    </div>
+</body>
+</html>
